@@ -1,47 +1,47 @@
 ﻿using System;
 
-namespace P4Q2
+namespace P1Q3
 {
     class Program
     {
-        public static int hesapla(int[] rakamlar)
-        {
-            int boyut = rakamlar.Length;
-            int tmp = boyut;
-
-            int fakt = 1;
-            int toplam = 0;
-
-            while (tmp >= 1)
-            {
-                toplam = 0;
-                fakt = 1;
-                for (int i = boyut; i >= tmp; i--)
-                {
-                    fakt = fakt * i;
-                    toplam += fakt;
-                    //Console.WriteLine(toplam);
-                }
-                tmp--;
-            }
-
-            return toplam;
-        }
-
         static void Main(string[] args)
         {
-            Console.Write("Kaç rakamlı dizi girileceğini yazınız (Lütfen 1 ile 10 arasında bir sayı giriniz): ");
+            Console.WriteLine("Kaç sayı girmek istediğiniz sorulduktan sonra " +
+                "girdiğiniz sayı kadar değer girmeniz istenecek ve bu değerler büyükten küçüğe sıralanacaktır.");
+            
+            Console.Write("\nKaç sayı girmek istediğinizi yazınız: ");
             int boyut = Convert.ToInt32(Console.ReadLine());
 
-            int[] rakamlar = new int[boyut];
+            int[] sayilar = new int[boyut];
 
-            for (int i = 0; i < boyut; i++)
+            Console.WriteLine("");
+            for(int i = 0; i < boyut; i++)
             {
-                Console.Write("{0}. elemanı giriniz: ", i + 1);
-                rakamlar[i] = Convert.ToInt32(Console.ReadLine());
+                Console.Write("{0}. sayıyı giriniz: ", i + 1);
+                sayilar[i] = Convert.ToInt32(Console.ReadLine());
             }
 
-            Console.Write(hesapla(rakamlar));
+            for(int i = 0; i < boyut - 1; i++)
+            {
+                for(int j = 0; j < boyut - i - 1; j++)
+                {
+                    if(sayilar[j] < sayilar[j + 1])
+                    {
+                        int tmp = sayilar[j];
+                        sayilar[j] = sayilar[j + 1];
+                        sayilar[j + 1] = tmp;
+                    }
+                }
+            }
+
+            Console.WriteLine("\nGirdiğiniz sayıların büyükten küçüğe sıralanmış hali: ");
+
+            for(int i = 0; i < boyut - 1; i++)
+            {
+                Console.Write(sayilar[i] + ", ");
+            }
+            Console.Write(sayilar[boyut - 1]);
+
             Console.ReadKey();
         }
     }
