@@ -1,42 +1,47 @@
 ﻿using System;
 
-namespace P1Q2
+namespace P4Q2
 {
     class Program
     {
+        public static int hesapla(int[] rakamlar)
+        {
+            int boyut = rakamlar.Length;
+            int tmp = boyut;
+
+            int fakt = 1;
+            int toplam = 0;
+
+            while (tmp >= 1)
+            {
+                toplam = 0;
+                fakt = 1;
+                for (int i = boyut; i >= tmp; i--)
+                {
+                    fakt = fakt * i;
+                    toplam += fakt;
+                    //Console.WriteLine(toplam);
+                }
+                tmp--;
+            }
+
+            return toplam;
+        }
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Girdiğiniz iki sayı arasındaki asal sayılar listelenecektir.");
+            Console.Write("Kaç rakamlı dizi girileceğini yazınız (Lütfen 1 ile 10 arasında bir sayı giriniz): ");
+            int boyut = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Aralığın başlangıç değerini giriniz: ");
-            int baslangic = Convert.ToInt32(Console.ReadLine());
+            int[] rakamlar = new int[boyut];
 
-            if (baslangic < 2)
+            for (int i = 0; i < boyut; i++)
             {
-                baslangic = 2;
+                Console.Write("{0}. elemanı giriniz: ", i + 1);
+                rakamlar[i] = Convert.ToInt32(Console.ReadLine());
             }
 
-            Console.Write("Aralığın bitiş değerini giriniz: ");
-
-            int bitis = Convert.ToInt32(Console.ReadLine());
-
-            int kontrol = 0;
-
-            for (int i = baslangic; i < bitis; i++)
-            {
-                for (int j = 2; j < i; j++)
-                {
-                    kontrol = 0;
-                    if (i % j == 0)
-                    {
-                        kontrol = 1;
-                        break;
-                    }
-                }
-                if (kontrol == 0)
-                    Console.WriteLine(i);
-            }
-
+            Console.Write(hesapla(rakamlar));
             Console.ReadKey();
         }
     }
